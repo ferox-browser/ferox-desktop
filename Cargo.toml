@@ -1,0 +1,13 @@
+[package]
+name = "ferox-desktop"
+version = "0.1.0"
+authors = ["Ferox", "Nik K. <b3yc0d3@gmail.com>"]
+description = "Simple privacy respecting browser."
+license = "MPL-2.0"
+edition = "2021"
+repository = "https://github.com/ferox-browser/ferox-desktop"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
