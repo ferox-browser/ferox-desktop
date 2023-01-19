@@ -11,3 +11,13 @@ publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[dependencies.gtk]
+package = "gtk4"
+version = "0.5.5"
+features = ["v4_8"]
+
+[profile.release]
+opt-level = "s" # optimize for binary size
+lto = true
+strip = true
