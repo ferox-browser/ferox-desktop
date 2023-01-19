@@ -1,5 +1,5 @@
 [package]
-name = "ferox-desktop"
+name = "ferox"
 version = "0.1.0"
 authors = ["Ferox", "Nik K. <b3yc0d3@gmail.com>"]
 description = "Simple privacy respecting browser."
@@ -11,3 +11,13 @@ publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[dependencies.gtk]
+package = "gtk4"
+version = "0.5.5"
+features = ["v4_8"]
+
+[profile.release]
+opt-level = "s" # optimize for binary size
+lto = true
+strip = true

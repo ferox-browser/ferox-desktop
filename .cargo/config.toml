@@ -1,0 +1,4 @@
+# Relevant for builds
+[env]
+APP_ID = "org.ferox.ferox"
+GTK_RESOURCES = { value = "gtk_src/ferox.gresource", relative = true }
