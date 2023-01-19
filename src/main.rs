@@ -8,5 +8,6 @@ fn main() {
     gtk::init().expect("Unable to initialize GTK");
     let app = app::FeroxApplication::new();
 
+    
     std::process::exit(app.run());
 }

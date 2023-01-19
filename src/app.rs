@@ -22,16 +22,20 @@ mod imp {
 
     impl ObjectImpl for FeroxApplication {}
     impl ApplicationImpl for FeroxApplication {
+
+        /*fn startup(&self) {
+            // TODO: load CSS and Resources file
+        }*/
+
         fn activate(&self) {
             self.parent_activate();
 
-            //gtk::ApplicationWindow::new(&*self.obj());
             let window = ui::TabApplicationWindow::new(&*self.obj());
             window.set_default_size(600, 350);
             window.set_title(Some("Ferox"));
 
+            // just a dummy test URL
             window.new_tab("https://google.com/");
-            //window.show();
             window.present();
 
             self.window.replace(Some(window));
@@ -59,18 +63,4 @@ impl FeroxApplication {
             ("flags", &gio::ApplicationFlags::empty()),
         ])
     }
-
-    /*pub fn new_tab(&self, url: &str) {
-        let window = self
-        .imp()
-        .window
-        .borrow();
-
-        match window.as_ref() {
-            Some(win) => {
-                win.new_tab(url)
-            }
-            None => {}
-        }
-    }*/
 }

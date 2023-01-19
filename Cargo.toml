@@ -1,5 +1,5 @@
 [package]
-name = "ferox-desktop"
+name = "ferox"
 version = "0.1.0"
 authors = ["Ferox", "Nik K. <b3yc0d3@gmail.com>"]
 description = "Simple privacy respecting browser."
