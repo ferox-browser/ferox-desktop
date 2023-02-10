@@ -1,0 +1,34 @@
+#!/usr/bin/python3.10
+
+from mlib import *
+from mlib.modules.cargo import *
+import argparse
+
+##
+# Helper functions
+##
+def parse_args():
+    parser = argparse.ArgumentParser(description='Build tool for Ferox')
+    parser.add_argument('-T', '--target', nargs='?', choices=['dev', 'release'],
+                    help='Select build profile', type=str, const='release', default='release')
+    
+    return parser.parse_args()
+
+project("ferox", "rust", "0.1.0")
+
+args = parse_args()
+target = args.target
+
+# Variables
+var("profile", args.target)
+var("application_id", "org.ferox.ferox")
+
+
+# Subdirs
+subdir("src")
+
+# Check for software
+dependency("cargo")
+dependency("glib-compile-resources")
+
+cargo_build(target)

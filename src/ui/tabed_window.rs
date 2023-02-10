@@ -8,15 +8,17 @@ mod imp {
     use gtk::{glib, CompositeTemplate};
 
     #[derive(Debug, Default, CompositeTemplate)]
-    #[template(file = "../../data/tab_window.glade")]
+    #[template(resource = "/org/ferox/Ferox/tab-window.ui")]
     pub struct TabApplicationWindow {
         #[template_child(id = "tabContainer")]
         pub notebook: TemplateChild<gtk::Notebook>,
+        #[template_child(id = "button_newTab")]
+        pub button_new_tab: TemplateChild<gtk::Button>,
     }
 
     #[glib::object_subclass]
     impl ObjectSubclass for TabApplicationWindow {
-        const NAME: &'static str = "ExApplicationWindow";
+        const NAME: &'static str = "TabApplicationWindow";
         type Type = super::TabApplicationWindow;
         type ParentType = gtk::ApplicationWindow;
 
@@ -43,6 +45,14 @@ mod imp {
     impl WidgetImpl for TabApplicationWindow {}
     impl WindowImpl for TabApplicationWindow {}
     impl ApplicationWindowImpl for TabApplicationWindow {}
+
+    #[gtk::template_callbacks]
+    impl TabApplicationWindow {
+        #[template_callback]
+        fn handle_buttonNewTab_clicked(&self, _button: &gtk::Button) {
+            println!("New tab");
+        }
+    }
 }
 
 glib::wrapper! {
@@ -75,6 +85,8 @@ impl TabApplicationWindow {
         hbox.append(&label);
         hbox.append(&button);
 
-        self.imp().notebook.append_page(&gtk::Box::builder().build(), Some(&hbox));
+        let body = gtk::Box::builder().build();
+
+        self.imp().notebook.append_page(&body, Some(&hbox));
     }
 }

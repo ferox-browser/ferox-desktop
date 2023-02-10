@@ -1,0 +1,18 @@
+#!/usr/bin/python3.10
+
+from mlib import *
+from mlib.modules.gnome import *
+from os import path as OPath
+
+src_path = OPath.join(project_root(), "src")
+
+gnome_compile_resources(f"{src_path}/ferox.gresource.xml", src_path)
+
+# Config
+
+conf = ConfigurationData()
+conf.set_quoted("VERSION", project_version())
+conf.set_quoted("APPLICATION_ID", var("application_id"))
+conf.set_quoted("PROFILE", var("profile"))
+
+configure_file("config.rs.in", "config.rs", conf)

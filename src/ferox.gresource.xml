@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/org/ferox/Ferox">
+        <file alias="tab-window.ui" preprocess="xml-stripblanks">gtk/tab-window.glade</file>
+        <file alias="style.css">gtk/style.css</file>
+    </gresource>
+</gresources>
