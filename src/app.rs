@@ -5,11 +5,11 @@ mod imp {
     use std::cell::RefCell;
 
     use crate::ui;
-    use gtk::{glib, prelude::*, subclass::prelude::*, CssProvider, gdk::Display, StyleContext};
+    use gtk::{gdk::Display, glib, prelude::*, subclass::prelude::*, CssProvider, StyleContext};
 
     #[derive(Debug, Default)]
     pub struct FeroxApplication {
-        pub window: RefCell<Option<ui::TabApplicationWindow>>,
+        pub window: RefCell<Option<ui::TabAppWindow>>,
     }
 
     #[glib::object_subclass]
@@ -26,7 +26,7 @@ mod imp {
 
             /* Load CSS Theme */
             let provider = CssProvider::new();
-            provider.load_from_resource("/org/ferox/Ferox/style.css");
+            provider.load_from_resource("/org/ferox/ferox/style.css");
 
             StyleContext::add_provider_for_display(
                 &Display::default().expect("Could not connect to a display."),
@@ -38,11 +38,14 @@ mod imp {
         fn activate(&self) {
             self.parent_activate();
 
-            let window = ui::TabApplicationWindow::new(&*self.obj());
+            let window = ui::TabAppWindow::new(&*self.obj());
             window.set_default_size(600, 350);
             window.set_title(Some("Ferox"));
 
+            window.new_tab("google.com");
+
             window.present();
+            window.maximize();
 
             self.window.replace(Some(window));
         }
@@ -63,9 +66,9 @@ impl Default for FeroxApplication {
 
 impl FeroxApplication {
     pub fn new() -> Self {
-        glib::Object::new(&[
-            ("application-id", &config::APPLICATION_ID),
-            ("flags", &gio::ApplicationFlags::empty()),
-        ])
+        glib::Object::builder()
+            .property("application-id", &config::APPLICATION_ID)
+            .property("flags", &gio::ApplicationFlags::empty())
+            .build()
     }
 }

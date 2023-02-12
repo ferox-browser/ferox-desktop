@@ -1,23 +1,22 @@
-use gtk::prelude::ApplicationExtManual;
+use gtk::prelude::*;
 use gtk::gio;
 use gtk::glib;
-//mod app1;
+use gtk::gdk;
+
 mod app;
 mod ui;
 mod config;
 
-fn main() {
-    println!("{} - {}", "??", config::VERSION);
+fn main() -> glib::ExitCode {
+    println!("{} - {}", config::BRAND_NAME, config::VERSION);
 
     gtk::init().expect("Unable to initialize GTK");
 
     let res = gio::Resource::from_data(&glib::Bytes::from(include_bytes!("ferox.gresource")));
-    gio::resources_register(&res.expect("Unable to find/load ferox.gresource"));
-    //gio::Resource::load("/ferox.gresource").expect("Unable to find ferox.gresource");
+    gio::resources_register(&res.expect("Unable to find/load gresource file"));
+    glib::set_prgname(Some(config::BRAND_NAME));
+    glib::set_application_name(config::BRAND_NAME);
 
-
-    let app = app::FeroxApplication::new();
-
-    
-    std::process::exit(app.run());
+    let application = app::FeroxApplication::new();
+    application.run()
 }

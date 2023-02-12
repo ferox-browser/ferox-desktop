@@ -1,25 +1,23 @@
-use gtk::subclass::prelude::*;
-use gtk::{gio, glib};
-use gtk::prelude::*;
+use gtk::{gio, glib, subclass::prelude::*};
 
 mod imp {
-    use gtk::prelude::*;
     use gtk::subclass::prelude::*;
+    use gtk::traits::ButtonExt;
     use gtk::{glib, CompositeTemplate};
 
     #[derive(Debug, Default, CompositeTemplate)]
-    #[template(resource = "/org/ferox/Ferox/tab-window.ui")]
-    pub struct TabApplicationWindow {
+    #[template(resource = "/org/ferox/ferox/tab-window.ui")]
+    pub struct TabAppWindow {
         #[template_child(id = "tabContainer")]
         pub notebook: TemplateChild<gtk::Notebook>,
         #[template_child(id = "button_newTab")]
-        pub button_new_tab: TemplateChild<gtk::Button>,
+        pub btn_new_tab: TemplateChild<gtk::Button>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for TabApplicationWindow {
-        const NAME: &'static str = "TabApplicationWindow";
-        type Type = super::TabApplicationWindow;
+    impl ObjectSubclass for TabAppWindow {
+        const NAME: &'static str = "TabAppWindow";
+        type Type = super::TabAppWindow;
         type ParentType = gtk::ApplicationWindow;
 
         // Within class_init() you must set the template.
@@ -27,7 +25,7 @@ mod imp {
         // bind_template() to set the template and bind all children at once.
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
-            //UtilityCallbacks::bind_template_callbacks(klass);
+            UtilityCallbacks::bind_template_callbacks(klass);
         }
 
         // You must call `Widget`'s `init_template()` within `instance_init()`.
@@ -36,36 +34,55 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for TabApplicationWindow {
-        fn constructed(&self) {
-            self.parent_constructed();
-        }
-    }
+    struct UtilityCallbacks {}
 
-    impl WidgetImpl for TabApplicationWindow {}
-    impl WindowImpl for TabApplicationWindow {}
-    impl ApplicationWindowImpl for TabApplicationWindow {}
-
-    #[gtk::template_callbacks]
-    impl TabApplicationWindow {
-        #[template_callback]
-        fn handle_buttonNewTab_clicked(&self, _button: &gtk::Button) {
+    #[gtk::template_callbacks(functions)]
+    impl UtilityCallbacks {
+        #[template_callback(name = "handle_button_new_tab_clicked")]
+        fn new_tab(btn: &gtk::Button) {
+            btn.set_label("Hello");
             println!("New tab");
         }
     }
+
+    impl ObjectImpl for TabAppWindow {
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.btn_new_tab.set_icon_name("ic_plus");
+        }
+    }
+
+    impl WidgetImpl for TabAppWindow {}
+    impl WindowImpl for TabAppWindow {}
+    impl ApplicationWindowImpl for TabAppWindow {}
 }
 
 glib::wrapper! {
-    pub struct TabApplicationWindow(ObjectSubclass<imp::TabApplicationWindow>)
+    pub struct TabAppWindow(ObjectSubclass<imp::TabAppWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, @implements gio::ActionMap, gio::ActionGroup;
 }
 
-impl TabApplicationWindow {
+impl TabAppWindow {
     pub fn new<P: glib::IsA<gtk::Application>>(app: &P) -> Self {
-        glib::Object::new(&[("application", app)])
+        glib::Object::builder().property("application", app).build()
     }
 
     pub fn new_tab(&self, _uri: &str) {
+        let imp = self.imp();
+        
+        let label = gtk::Label::builder()
+            .halign(gtk::Align::Center)
+            .hexpand(true)
+            .label("New Tab")
+            .build();
+
+        let body = gtk::Box::builder().build();
+
+        imp.notebook.append_page(&body, Some(&label));
+        imp.notebook.shows_tabs();
+    }
+
+    /*pub fn new_tab(&self, _uri: &str) {
         let img = gtk::Image::from_resource("/org/ferox/icons/ic_close");
 
         let button = gtk::Button::builder()
@@ -73,13 +90,13 @@ impl TabApplicationWindow {
             .focus_on_click(false)
             .child(&img)
             .build();
-    
+
         let label = gtk::Label::builder()
             .justify(gtk::Justification::Fill)
             .halign(gtk::Align::Start)
             .label("New Tab")
             .build();
-    
+
         let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
         hbox.set_homogeneous(false);
         hbox.append(&label);
@@ -88,5 +105,5 @@ impl TabApplicationWindow {
         let body = gtk::Box::builder().build();
 
         self.imp().notebook.append_page(&body, Some(&hbox));
-    }
+    }*/
 }

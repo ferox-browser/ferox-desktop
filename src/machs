@@ -1,4 +1,4 @@
-#!/usr/bin/python3.10
+#!/usr/bin/env python3.10
 
 from mlib import *
 from mlib.modules.gnome import *
@@ -14,5 +14,6 @@ conf = ConfigurationData()
 conf.set_quoted("VERSION", project_version())
 conf.set_quoted("APPLICATION_ID", var("application_id"))
 conf.set_quoted("PROFILE", var("profile"))
+conf.set_quoted("BRAND_NAME", var("name"))
 
 configure_file("config.rs.in", "config.rs", conf)

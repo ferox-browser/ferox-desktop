@@ -14,7 +14,7 @@ publish = false
 
 [dependencies.gtk]
 package = "gtk4"
-version = "0.5.5"
+version = "0.6.0"
 features = ["v4_8"]
 
 [profile.release]

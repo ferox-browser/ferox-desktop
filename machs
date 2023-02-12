@@ -1,16 +1,18 @@
-#!/usr/bin/python3.10
+#!/usr/bin/env python3.10
 
 from mlib import *
 from mlib.modules.cargo import *
 import argparse
+from os import path as OPath
 
 ##
 # Helper functions
 ##
 def parse_args():
     parser = argparse.ArgumentParser(description='Build tool for Ferox')
-    parser.add_argument('-T', '--target', nargs='?', choices=['dev', 'release'],
+    parser.add_argument('-t', '--target', nargs='?', choices=['debug', 'release'],
                     help='Select build profile', type=str, const='release', default='release')
+    parser.add_argument('-E', '--execute', action='store_true', help='If set, program will be executed after successfull build.')
     
     return parser.parse_args()
 
@@ -19,9 +21,14 @@ project("ferox", "rust", "0.1.0")
 args = parse_args()
 target = args.target
 
+##
 # Variables
+##
 var("profile", args.target)
 var("application_id", "org.ferox.ferox")
+
+# branding variables
+var("name", "Ferox")
 
 
 # Subdirs
@@ -32,3 +39,6 @@ dependency("cargo")
 dependency("glib-compile-resources")
 
 cargo_build(target)
+
+if args.execute:
+    run_command(OPath.join(project_root(), "target", target, project_name()))

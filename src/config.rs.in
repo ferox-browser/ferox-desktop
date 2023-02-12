@@ -1,3 +1,4 @@
 pub static VERSION: &str = @VERSION@;
 pub static APPLICATION_ID: &str = @APPLICATION_ID@;
 pub static PROFILE: &str = @PROFILE@;
+pub static BRAND_NAME: &str = @BRAND_NAME@;

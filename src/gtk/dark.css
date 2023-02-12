@@ -1,0 +1,37 @@
+/*
+ * Colors
+ */
+/* Blue de France */
+@define-color accent #318CE7;
+
+@define-color black_1 #1b1b1b;
+@define-color black_2 #424242;
+@define-color black_3 #6d6d6d;
+@define-color black_4 #9b9b9b;
+@define-color black_5 #cccccc;
+
+@define-color success #4d8b00;
+@define-color warning #E86100;
+@define-color danger #ed2939;
+
+/*
+ * TEXT
+ */
+@define-color text_normal #FFFFFF;
+@define-color text_diabled #c6c6c6;
+@define-color text_muted #5e5e5e;
+
+/* Style */
+
+notebook>header>tabs>tab {
+	box-shadow: none;
+}
+
+notebook>header>tabs>tab:checked {
+    background: #272727;
+    outline: 0;
+    border-bottom: 0;
+    border-image: none;
+    color: #ffffff;
+    background: #318CE7;
+}

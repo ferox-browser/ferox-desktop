@@ -6,20 +6,20 @@ A simple, privacy respecting modern browser.
 
 ### Todo
 
-- [ ] Add localization
-- [ ] User Interface  
-- [ ] Custom UI Theme  
+- [ ] Add localization  
 - [ ] Add installation script  
 - [ ] Gecko Bindings for GTK4  
 - [ ] Bookmark system  
 - [ ] Tab system or special windows for e.g. I2P and MAYBE TOR  
 - [ ] Integrated Ad and Tracker Blocker  
 - [ ] Browser Extension System  
-- [ ] Translate :: English
-- [ ] Translate :: German
+- [ ] Translate :: English  
+- [ ] Translate :: German  
 
 ### In Progress
 
+- [ ] User Interface  
+- [ ] Custom UI Theme  
 
 ### Done ✓
 

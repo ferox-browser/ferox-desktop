@@ -19,6 +19,7 @@ Ferox is a simple browser that
 **Currently we use Webkit2, untill we managed to create Gecko bindings for Rust and GTK4.<br>You wanna help? feel free to make a pull request!**
 
 ## Build
+You need to have installed `python >= 3.10` in order to be able to use the `machs` scripts.<br>
 See [official gtk4-rs installation guide](https://gtk-rs.org/gtk4-rs/stable/latest/book/installation.html) for your platform.<br>
 > we might change our build system and steps in the future
 ```console
@@ -26,13 +27,13 @@ git clone git@github.com:ferox-browser/ferox-desktop.git
 
 cd ferox-desktop
 
-cargo build --release
+./machs -t release
 ```
 
 ## Install
 
 ```sh
-cargo install
+./machs --install
 ```
 
 ## Contributing
@@ -50,3 +51,4 @@ Give a ⭐️ if this project helped you!
 ### Crates/Packages/Modules
 > - [GTK for Rust](https://gtk-rs.org/)
 > - [webkit2gtk](https://crates.io/crates/webkit2gtk)
+> - [Icons](https://akveo.github.io/eva-icons/#/)

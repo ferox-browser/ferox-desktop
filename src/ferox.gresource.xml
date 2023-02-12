@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-    <gresource prefix="/org/ferox/Ferox">
-        <file alias="tab-window.ui" preprocess="xml-stripblanks">gtk/tab-window.glade</file>
+    <gresource prefix="/org/ferox/ferox">
+        <file alias="tab-window.ui" preprocess="xml-stripblanks">gtk/tab-window.ui</file>
         <file alias="style.css">gtk/style.css</file>
+    </gresource>
+
+    <gresource prefix="/org/ferox/ferox/icons/scalable/actions">
+        <file alias="ic_arrow-left.svg">assets/ic_arrow-left.svg</file>
+        <file alias="ic_arrow-right.svg">assets/ic_arrow-right.svg</file>
+        <file alias="ic_plus.svg">assets/ic_plus.svg</file>
     </gresource>
 </gresources>
