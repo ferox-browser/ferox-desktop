@@ -6,8 +6,22 @@
     </gresource>
 
     <gresource prefix="/org/ferox/ferox/icons/scalable/actions">
-        <file alias="ic_arrow-left.svg">assets/ic_arrow-left.svg</file>
-        <file alias="ic_arrow-right.svg">assets/ic_arrow-right.svg</file>
-        <file alias="ic_plus.svg">assets/ic_plus.svg</file>
+        <!-- DARK ICONS -->
+        <file alias="close-dark.svg">assets/dark/ic_close.svg</file>
+        <file alias="plus-dark.svg">assets/dark/ic_plus.svg</file>
+        <file alias="globe-2-dark.svg">assets/dark/ic_globe-2.svg</file>
+        <file alias="refresh-dark.svg">assets/dark/ic_refresh.svg</file>
+        <file alias="settings-dark.svg">assets/dark/ic_settings.svg</file>
+        <file alias="menu-dark.svg">assets/dark/ic_menu.svg</file>
+        <file alias="arrow-left-dark.svg">assets/dark/ic_arrow-left.svg</file>
+        <file alias="arrow-right-dark.svg">assets/dark/ic_arrow-right.svg</file>
+        <file alias="shield-off-outline-dark.svg">assets/dark/ic_shield-off-outline.svg</file>
+        <file alias="shield-off-dark.svg">assets/dark/ic_shield-off.svg</file>
+        <file alias="shield-outline-dark.svg">assets/dark/ic_shield-outline.svg</file>
+        <file alias="shield.svg">assets/dark/ic_shield.svg</file>
+        <file alias="star-outline-dark.svg">assets/dark/ic_star-outline.svg</file>
+        <file alias="star-dark.svg">assets/dark/ic_star.svg</file>
+        <file alias="lock-dark.svg">assets/dark/ic_lock.svg</file>
+        <file alias="unlock-dark.svg">assets/dark/ic_unlock.svg</file>
     </gresource>
 </gresources>

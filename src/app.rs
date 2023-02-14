@@ -43,6 +43,7 @@ mod imp {
             window.set_title(Some("Ferox"));
 
             window.new_tab("google.com");
+            window.new_tab("google.com");
 
             window.present();
             window.maximize();

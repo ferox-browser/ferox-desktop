@@ -11,7 +11,8 @@
       <object class="GtkNotebook" id="tabContainer">
         <property name="focusable">1</property>
         <child>
-          <object class="GtkNotebookPage">
+          <placeholder />
+          <!--<object class="GtkNotebookPage">
             <property name="child">
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
@@ -26,7 +27,7 @@
                 <property name="hexpand">True</property>
               </object>
             </property>
-          </object>
+          </object>-->
         </child>
 
         <child type="action-end">

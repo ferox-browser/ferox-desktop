@@ -1,4 +1,4 @@
-use gtk::{gio, glib, subclass::prelude::*};
+use gtk::{gio, glib, subclass::prelude::*, prelude::*};
 
 mod imp {
     use gtk::subclass::prelude::*;
@@ -48,7 +48,7 @@ mod imp {
     impl ObjectImpl for TabAppWindow {
         fn constructed(&self) {
             self.parent_constructed();
-            self.btn_new_tab.set_icon_name("ic_plus");
+            self.btn_new_tab.set_icon_name("plus-dark");
         }
     }
 
@@ -72,13 +72,38 @@ impl TabAppWindow {
         
         let label = gtk::Label::builder()
             .halign(gtk::Align::Center)
-            .hexpand(true)
             .label("New Tab")
             .build();
 
+        let favicon = gtk::Image::builder()
+            .icon_name("globe-2-dark")
+            .build();
+
+        let button_close = gtk::Button::builder()
+            .icon_name("close-dark")
+            .build();
+
+        let box_label_ic = gtk::Box::new(gtk::Orientation::Horizontal, 4);
+            box_label_ic.append(&favicon);
+            box_label_ic.append(&label);
+
+        let box_2 = gtk::CenterBox::builder()
+            .hexpand(true)
+            .orientation(gtk::Orientation::Horizontal)
+            .build();
+
+        box_2.set_center_widget(Some(&box_label_ic));
+
+        let box_parent = gtk::Box::new(gtk::Orientation::Horizontal, 8);
+        box_parent.append(&box_2);
+        box_parent.append(&button_close);
+
+        /*let box_center = gtk::CenterBox::new();
+        box_center.set_orientation(gtk::Orientation::Horizontal);*/
+
         let body = gtk::Box::builder().build();
 
-        imp.notebook.append_page(&body, Some(&label));
+        imp.notebook.append_page(&body, Some(&box_parent));
         imp.notebook.shows_tabs();
     }
 

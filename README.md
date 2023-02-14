@@ -1,6 +1,7 @@
 # Ferox
 
 <!-- Bandges -->
+![](https://img.shields.io/badge/platform-linux-%23989898)
 [![](https://img.shields.io/github/v/release/ferox-browser/ferox-desktop?include_prereleases)]()
 [![MPL-2.0](https://img.shields.io/github/license/ferox-browser/ferox-desktop)](https://github.com/ferox-browser/ferox-desktop/blob/master/LICENSE)
 [![gtk4 0.5.5](https://img.shields.io/crates/v/gtk4?label=gtk4&logo=gtk)](https://crates.io/crates/gtk4)
@@ -23,7 +24,7 @@ You need to have installed `python >= 3.10` in order to be able to use the `mach
 See [official gtk4-rs installation guide](https://gtk-rs.org/gtk4-rs/stable/latest/book/installation.html) for your platform.<br>
 > we might change our build system and steps in the future
 ```console
-git clone git@github.com:ferox-browser/ferox-desktop.git
+git clone https://github.com/ferox-browser/ferox-desktop.git
 
 cd ferox-desktop
 
@@ -51,4 +52,4 @@ Give a ⭐️ if this project helped you!
 ### Crates/Packages/Modules
 > - [GTK for Rust](https://gtk-rs.org/)
 > - [webkit2gtk](https://crates.io/crates/webkit2gtk)
-> - [Icons](https://akveo.github.io/eva-icons/#/)
+> - [Eva icons](https://akveo.github.io/eva-icons/#/)

@@ -17,6 +17,13 @@ fn main() -> glib::ExitCode {
     glib::set_prgname(Some(config::BRAND_NAME));
     glib::set_application_name(config::BRAND_NAME);
 
+    /* let itheme = gtk::IconTheme::builder()
+        .theme_name("ferox_dark")
+        .display(&gdk::Display::default().unwrap())
+        .build();
+
+    println!("{:?}", itheme.theme_name());*/
+
     let application = app::FeroxApplication::new();
     application.run()
 }
