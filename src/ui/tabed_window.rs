@@ -1,4 +1,5 @@
 use gtk::{gio, glib, subclass::prelude::*, prelude::*};
+use crate::glib::clone;
 
 mod imp {
     use gtk::subclass::prelude::*;
@@ -39,8 +40,7 @@ mod imp {
     #[gtk::template_callbacks(functions)]
     impl UtilityCallbacks {
         #[template_callback(name = "handle_button_new_tab_clicked")]
-        fn new_tab(btn: &gtk::Button) {
-            btn.set_label("Hello");
+        fn new_tab(_btn: &gtk::Button) {
             println!("New tab");
         }
     }
@@ -67,25 +67,28 @@ impl TabAppWindow {
         glib::Object::builder().property("application", app).build()
     }
 
-    pub fn new_tab(&self, _uri: &str) {
+    pub fn new_tab<'a>(&'a self, _uri: &str) {
         let imp = self.imp();
         
-        let label = gtk::Label::builder()
+        // Label for displaying the tabs titlte
+        let label_title = gtk::Label::builder()
             .halign(gtk::Align::Center)
             .label("New Tab")
             .build();
 
-        let favicon = gtk::Image::builder()
+        // Image for displaying the websites favicon
+        let img_favicon = gtk::Image::builder()
             .icon_name("globe-2-dark")
             .build();
 
+        // Button closing the tab
         let button_close = gtk::Button::builder()
             .icon_name("close-dark")
             .build();
 
         let box_label_ic = gtk::Box::new(gtk::Orientation::Horizontal, 4);
-            box_label_ic.append(&favicon);
-            box_label_ic.append(&label);
+            box_label_ic.append(&img_favicon);
+            box_label_ic.append(&label_title);
 
         let box_2 = gtk::CenterBox::builder()
             .hexpand(true)
@@ -98,37 +101,20 @@ impl TabAppWindow {
         box_parent.append(&box_2);
         box_parent.append(&button_close);
 
-        /*let box_center = gtk::CenterBox::new();
-        box_center.set_orientation(gtk::Orientation::Horizontal);*/
-
         let body = gtk::Box::builder().build();
 
         imp.notebook.append_page(&body, Some(&box_parent));
         imp.notebook.shows_tabs();
+
+        // current tab id
+        let id = imp.notebook.page_num(&body);
+
+        // Got it working thank's to:
+        // @see https://users.rust-lang.org/t/gtk-rs-ref-counting-cycles-and-connect-destroy/46538
+        button_close.connect_clicked(clone!(@weak self as self_ => move |_btn| self_.close_tab(id)));
     }
 
-    /*pub fn new_tab(&self, _uri: &str) {
-        let img = gtk::Image::from_resource("/org/ferox/icons/ic_close");
-
-        let button = gtk::Button::builder()
-            .name("close-tab")
-            .focus_on_click(false)
-            .child(&img)
-            .build();
-
-        let label = gtk::Label::builder()
-            .justify(gtk::Justification::Fill)
-            .halign(gtk::Align::Start)
-            .label("New Tab")
-            .build();
-
-        let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-        hbox.set_homogeneous(false);
-        hbox.append(&label);
-        hbox.append(&button);
-
-        let body = gtk::Box::builder().build();
-
-        self.imp().notebook.append_page(&body, Some(&hbox));
-    }*/
+    pub fn close_tab(&self, tab_num: Option<u32>) {
+        self.imp().notebook.remove_page(tab_num);
+    }
 }

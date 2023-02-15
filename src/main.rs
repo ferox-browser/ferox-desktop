@@ -1,7 +1,6 @@
 use gtk::prelude::*;
 use gtk::gio;
 use gtk::glib;
-use gtk::gdk;
 
 mod app;
 mod ui;

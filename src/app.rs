@@ -3,13 +3,14 @@ use gtk::{gio, glib};
 
 mod imp {
     use std::cell::RefCell;
+    use std::rc::Rc;
 
     use crate::ui;
     use gtk::{gdk::Display, glib, prelude::*, subclass::prelude::*, CssProvider, StyleContext};
 
     #[derive(Debug, Default)]
     pub struct FeroxApplication {
-        pub window: RefCell<Option<ui::TabAppWindow>>,
+        pub window: Rc<RefCell<Option<ui::TabAppWindow>>>,
     }
 
     #[glib::object_subclass]
@@ -39,16 +40,18 @@ mod imp {
             self.parent_activate();
 
             let window = ui::TabAppWindow::new(&*self.obj());
+            
             window.set_default_size(600, 350);
             window.set_title(Some("Ferox"));
-
+            
+            // Creating dummy tabs
             window.new_tab("google.com");
             window.new_tab("google.com");
-
+            
             window.present();
             window.maximize();
+            self.window.replace(Some(window));            
 
-            self.window.replace(Some(window));
         }
     }
 
